@@ -9,8 +9,6 @@ using std::cout;
 using std::ostream_iterator;
 using std::filesystem::exists;
 
-typedef vector<string> stringvec;
-
 int main(int argc, char *argv[]) {
   if (argc < 2) {
     printf("ERROR: Type in a file path\n");
@@ -24,10 +22,6 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  stringvec filenames;
-  read_directory_filenames(filePath, filenames);
-  copy(filenames.begin(), filenames.end(),
-       ostream_iterator<string>(cout, "\n"));
-
+  create_fsd_folder_directory(filePath);
   return 0;
 }

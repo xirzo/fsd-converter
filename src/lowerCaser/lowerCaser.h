@@ -2,4 +2,4 @@
 #include <string>
 using std::string;
 
-void lowerCase(string &name);
+void lower_case(string &name);

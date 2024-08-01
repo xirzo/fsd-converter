@@ -5,4 +5,4 @@
 
 using std::string;
 
-void createFsdFoldersDirectory(const string &filename);
+void create_fsd_folder_directory(const string &filename);

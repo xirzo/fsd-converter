@@ -1,3 +1,3 @@
 #include "lowerCaser.h"
 
-void lowerCase(string &name) { name[0] = tolower(name[0]); }
+void lower_case(string &name) { name[0] = tolower(name[0]); }
