@@ -2,10 +2,12 @@
 
 #include <cstdio>
 #include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <ostream>
 
 using std::cout;
+using std::ofstream;
 using std::filesystem::create_directory;
 using std::filesystem::exists;
 
@@ -24,8 +26,8 @@ int main(int argc, char *argv[]) {
 
   string file_extension = get_file_extension(file_path);
 
-  if (file_extension != "tsx" && file_extension != "jsx") {
-    cout << "ERROR: File should have .jsx or .tsx extension\n";
+  if (file_extension != "tsx") {
+    cout << "ERROR: File should have .tsx extension\n";
     return 1;
   }
 
@@ -36,6 +38,13 @@ int main(int argc, char *argv[]) {
   create_directory((filename + "/ui").c_str());
   rename(filename_with_extension.c_str(),
          (filename + "/ui/" + filename_with_extension).c_str());
+
+  ofstream index_file("index.ts");
+  index_file << "export { " << filename << " } from './ui/"
+             << filename_with_extension << "';";
+  index_file.close();
+
+  rename("index.ts", (filename + "/" + "index.ts").c_str());
 
   return 0;
 }
