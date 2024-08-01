@@ -1,7 +1,7 @@
 #include "foldersCreator.h"
 
 void create_fsd_folder_directory(const string &filename) {
-  string lowercaseFilename = filename;
-  lower_case(lowercaseFilename);
-  std::filesystem::create_directory(filename);
+  string lowercase_filename = filename;
+  lower_case(lowercase_filename);
+  std::filesystem::create_directory(lowercase_filename);
 }

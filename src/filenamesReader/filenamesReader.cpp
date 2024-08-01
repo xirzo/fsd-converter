@@ -1,6 +1,11 @@
 #include "filenamesReader.h"
 
 string get_filename(const string &path) {
+  string file_name = get_filename(path);
+  return file_name.substr(0, file_name.find_last_of("."));
+}
+
+string get_filename_with_extension(const string &path) {
   return path.substr(path.find_last_of("/\\") + 1);
 }
 
