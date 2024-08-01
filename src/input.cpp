@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <dirent.h>
 #include <filesystem>
 #include <iostream>
@@ -6,9 +7,16 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <vector>
-typedef std::vector<std::string> stringvec;
+using std::copy;
+using std::cout;
+using std::ostream_iterator;
+using std::string;
+using std::vector;
+using std::filesystem::exists;
 
-void read_directory_filenames(const std::string &name, stringvec &filenames) {
+typedef vector<string> stringvec;
+
+void read_directory_filenames(const string &name, stringvec &filenames) {
   DIR *directory = opendir(name.c_str());
   struct dirent *dirents;
 
@@ -19,6 +27,8 @@ void read_directory_filenames(const std::string &name, stringvec &filenames) {
   closedir(directory);
 }
 
+void createFsdFoldersDirectory(const string &filename) {}
+
 int main(int argc, char *argv[]) {
 
   if (argc < 2) {
@@ -28,14 +38,15 @@ int main(int argc, char *argv[]) {
 
   char *directoryPath = argv[1];
 
-  if (std::filesystem::exists(directoryPath) == false) {
-    std::cout << "ERROR: Can`t access directory with that path\n";
+  if (exists(directoryPath) == false) {
+    cout << "ERROR: Can`t access directory with that path\n";
+    return 1;
   }
 
   stringvec filenames;
   read_directory_filenames(directoryPath, filenames);
-  std::copy(filenames.begin(), filenames.end(),
-            std::ostream_iterator<std::string>(std::cout, "\n"));
+  copy(filenames.begin(), filenames.end(),
+       ostream_iterator<string>(cout, "\n"));
 
   return 0;
 }
