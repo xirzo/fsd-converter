@@ -1,6 +1,7 @@
 #include "./filenamesReader/filenamesReader.h"
 #include "./foldersCreator/foldersCreator.h"
 
+#include <cstdio>
 #include <iostream>
 #include <iterator>
 
@@ -15,13 +16,17 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  char *filePath = argv[1];
+  char *file_path = argv[1];
 
-  if (exists(filePath) == false) {
+  if (exists(file_path) == false) {
     cout << "ERROR: Can`t access file with that path\n";
     return 1;
   }
 
-  create_fsd_folder_directory(filePath);
+  string filename = get_filename(file_path);
+  string new_file_path = "../" + filename;
+  rename(file_path, new_file_path.c_str());
+
+  create_fsd_folder_directory(filename);
   return 0;
 }
