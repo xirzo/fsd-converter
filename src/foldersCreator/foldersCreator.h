@@ -1,5 +1,5 @@
 #pragma once
-#include "../lowerCaser/lowerCaser.h"
+#include "../caser/caser.h"
 #include <filesystem>
 #include <string>
 

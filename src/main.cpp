@@ -1,13 +1,11 @@
 #include "./filenamesReader/filenamesReader.h"
 #include "./foldersCreator/foldersCreator.h"
+#include "caser/caser.h"
 
 #include <cstdio>
 #include <iostream>
-#include <iterator>
 
-using std::copy;
 using std::cout;
-using std::ostream_iterator;
 using std::filesystem::exists;
 
 int main(int argc, char *argv[]) {
@@ -23,10 +21,14 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  string filename = get_filename(file_path);
-  string new_file_path = "../" + filename;
-  rename(file_path, new_file_path.c_str());
+  string temp_filename = get_filename(file_path);
+  string filename = temp_filename;
+  lower_case(filename);
+  rename(temp_filename.c_str(), filename.c_str());
 
-  create_fsd_folder_directory(filename);
+  string directory_name = filename;
+  upper_case(directory_name);
+  create_fsd_folder_directory(directory_name);
+
   return 0;
 }
