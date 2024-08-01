@@ -33,11 +33,13 @@ int main(int argc, char *argv[]) {
   }
 
   string filename = get_filename(file_path);
+  string upper_cased_filename_with_extension = filename + "." + file_extension;
+  lower_case(filename);
   string filename_with_extension = filename + "." + file_extension;
 
   create_directory(filename);
   create_directory((filename + "/ui").c_str());
-  rename(filename_with_extension.c_str(),
+  rename(upper_cased_filename_with_extension.c_str(),
          (filename + "/ui/" + filename_with_extension).c_str());
 
   string function_name = filename;
