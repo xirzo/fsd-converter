@@ -1,6 +1,4 @@
 #include "./filenamesReader/filenamesReader.h"
-#include "./foldersCreator/foldersCreator.h"
-#include "caser/caser.h"
 
 #include <cstdio>
 #include <filesystem>
@@ -24,8 +22,16 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
+  string file_extension = get_file_extension(file_path);
+
+  if (file_extension != "tsx" && file_extension != "jsx") {
+    cout << "ERROR: File should have .jsx or .tsx extension\n";
+    return 1;
+  }
+
   string filename = get_filename(file_path);
-  string filename_with_extension = get_filename_with_extension(file_path);
+  string filename_with_extension = filename + "." + file_extension;
+
   create_directory(filename);
   create_directory((filename + "/ui").c_str());
   rename(filename_with_extension.c_str(),

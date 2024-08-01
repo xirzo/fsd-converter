@@ -9,6 +9,10 @@ string get_filename_with_extension(const string &path) {
   return path.substr(path.find_last_of("/\\") + 1);
 }
 
+string get_file_extension(const string &path) {
+  return path.substr(path.find_last_of(".") + 1);
+}
+
 void read_directory_filenames(const string &path, stringvec &filenames) {
   DIR *directory = opendir(path.c_str());
   struct dirent *dirents;
