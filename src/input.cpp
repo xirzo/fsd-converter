@@ -1,3 +1,4 @@
+#include <cctype>
 #include <cstdlib>
 #include <dirent.h>
 #include <filesystem>
@@ -27,7 +28,11 @@ void read_directory_filenames(const string &name, stringvec &filenames) {
   closedir(directory);
 }
 
-void createFsdFoldersDirectory(const string &filename) {}
+void lowerCase(string &name) { name[0] = tolower(name[0]); }
+
+void createFsdFoldersDirectory(const string &filename) {
+  std::filesystem::create_directory(filename);
+}
 
 int main(int argc, char *argv[]) {
 
