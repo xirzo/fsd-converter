@@ -3,10 +3,12 @@
 #include "caser/caser.h"
 
 #include <cstdio>
+#include <filesystem>
 #include <iostream>
 #include <ostream>
 
 using std::cout;
+using std::filesystem::create_directory;
 using std::filesystem::exists;
 
 int main(int argc, char *argv[]) {
@@ -24,7 +26,10 @@ int main(int argc, char *argv[]) {
 
   string filename = get_filename(file_path);
   string filename_with_extension = get_filename_with_extension(file_path);
-  create_fsd_folder_directory(filename);
+  create_directory(filename);
+  create_directory((filename + "/ui").c_str());
+  rename(filename_with_extension.c_str(),
+         (filename + "/ui/" + filename_with_extension).c_str());
 
   return 0;
 }
