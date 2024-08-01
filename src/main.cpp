@@ -1,3 +1,4 @@
+#include "./caser/caser.h"
 #include "./filenamesReader/filenamesReader.h"
 
 #include <cstdio>
@@ -39,9 +40,12 @@ int main(int argc, char *argv[]) {
   rename(filename_with_extension.c_str(),
          (filename + "/ui/" + filename_with_extension).c_str());
 
+  string function_name = filename;
+  upper_case(function_name);
+
   ofstream index_file((filename + "/" + "index.ts").c_str());
-  index_file << "export { " << filename << " } from './ui/"
-             << filename_with_extension << "';";
+  index_file << "export { " << function_name << " } from './ui/" << filename
+             << "';";
   index_file.close();
 
   return 0;
