@@ -29,6 +29,7 @@ int main(int argc, char *argv[]) {
   string directory_name = filename;
   upper_case(directory_name);
   create_fsd_folder_directory(directory_name);
+  rename(filename.c_str(), (directory_name + "/" + filename).c_str());
 
   return 0;
 }
